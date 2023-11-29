@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+
+<body class="bg-gray-100 min-h-screen">
+  <div class="flex">
+    <div class="flex flex-col h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+    <div class="w-3/4 p-4">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold mb-8">Jobs</h1>
+        <div class="overflow-x-auto">
+          <table class="table-auto border-collapse w-full">
+            <thead>
+              <tr>
+                <th class="px-4 py-2 text-left">ID</th>
+                <th class="px-4 py-2 text-left">Name</th>
+                <th class="px-4 py-2 text-left">Next Run Time</th>
+                <th class="px-4 py-2 text-left">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for job in jobs %}
+              <tr>
+                <td class="border px-4 py-2">{{ job.id }}</td>
+                <td class="border px-4 py-2">{{ job.name }}</td>
+                <td class="border px-4 py-2">{{ job.next_run_time }}</td>
+                <td class="border px-4 py-2">{{ job.status }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

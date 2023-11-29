@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>{{ title }}</title>
+
+    <script>
+      $(document).ready(function () {
+        $("#runPythonButton").click(function () {
+          $.ajax({
+            type: "GET",
+            url: "/run_StockSelection_python_program", // Replace with the actual route of your Python program execution
+            success: function (response) {
+              var output = response.output;
+              alert("Python program executed successfully!");
+            },
+            error: function (error) {
+              alert("An error occurred while executing the Python program.");
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body class="min-vh-100">
+    <!-- Common header or navigation elements can be placed here -->
+
+    {% block content %} {% endblock %}
+  </body>
+</html>

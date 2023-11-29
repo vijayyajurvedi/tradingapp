@@ -1,0 +1,195 @@
+{% extends "base.html" %} {% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="container w-auto bg-white shadow-md rounded px-8 py-8">
+    <h1 class="text-3xl text-center font-bold mb-8">User Registration</h1>
+
+    {% if error %}
+    <p class="text-red-500 text-center mb-2">{{ error }}</p>
+    {% endif %}
+
+    <!-- Add Home button -->
+    <div class="flex justify-center mb-2 space-x-4">
+      <button
+        onclick="location.href='/'"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+      >
+        Home
+      </button>
+      <button
+        onclick="location.href='/login'"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+      >
+        Login
+      </button>
+    </div>
+
+    <form action="/register" method="POST">
+      <div class="mb-2">
+        <label for="fullname" class="block text-sm font-medium text-gray-700"
+          >Full Name:</label
+        >
+        <input
+          type="text"
+          name="fullname"
+          id="fullname"
+          required
+          class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="email" class="block text-sm font-medium text-gray-700"
+          >Email:</label
+        >
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label for="password" class="block text-sm font-medium text-gray-700"
+          >Password:</label
+        >
+        <input
+          type="password"
+          name="password"
+          id="password"
+          required
+          class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+        />
+      </div>
+      <div class="mb-2">
+        <label for="mobile_no" class="block text-sm font-medium text-gray-700"
+          >Mobile Number:</label
+        >
+        <input
+          type="text"
+          name="mobile_no"
+          id="mobile_no"
+          required
+          pattern="\d{10}"
+          title="Enter Valid Mobile Number Only"
+          class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+          onblur="validateMobileNumber()"
+        />
+
+        <div id="error_message" class="error-message"></div>
+      </div>
+      <div class="mb-2">
+        <label for="address" class="block text-sm font-medium text-gray-700"
+          >Address:</label
+        >
+        <textarea
+          name="address"
+          id="address"
+          rows="3"
+          required
+          class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full resize-none"
+        ></textarea>
+      </div>
+
+      <div class="mb-6">
+        <label for="zipcode" class="block text-sm font-medium text-gray-700"
+          >Zipcode:</label
+        >
+        <input
+          type="text"
+          name="zipcode"
+          id="zipcode"
+          required
+          pattern="[0-9]{6}"
+          class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+          title="Enter Valid Zip Code"
+          oninvalid="this.setCustomValidity('Enter Valid Zip Code Only')"
+          oninput="this.setCustomValidity('')"
+        />
+      </div>
+
+      <!-- Terms and Conditions Checkbox -->
+      <div class="text-center">
+        <label class="block text-sm font-medium text-red-700">
+          DO YOU HAVE A DEMAT/TRADING ACCOUNT WITH ICICI BANK?
+        </label>
+
+        <label class="block text-sm font-medium text-red-700"
+          >IF YES, PLEASE TICK THE FOLLOWING BOX</label
+        >
+
+        <input
+          type="checkbox"
+          name="is_icici_demat_account"
+          id="is_icici_demat_account"
+          class="mt-1 mx-auto"
+        />
+      </div>
+
+      <div class="row mt-4">
+        <div class="flex justify-center">
+          <label class="col-md-6">
+            I have read and accept the
+            <a href="/terms_and_conditions"
+              ><strong class="text-blue-700">Terms and Conditions</strong></a
+            >.
+          </label>
+          <input
+            class="col-md-6"
+            type="checkbox"
+            name="terms_and_conditions"
+            id="terms_and_conditions"
+            class="mt-1 mx-auto"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-2">
+        <button
+          type="submit"
+          id="register_button"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const mobileCodes = {{ mobile_codes|tojson|safe }};
+
+    function validateMobileNumber() {
+      const mobileInput = document.getElementById("mobile_no");
+      const enteredNumber = mobileInput.value.trim();
+      const registerButton = document.getElementById("register_button");
+      // Check if the entered number starts with any of the series
+      const isValid = mobileCodes.some(code => enteredNumber.startsWith(code.Series));
+
+      if (!isValid) {
+        //alert("Invalid mobile number series");
+        const myElement = document.getElementById('error_message')
+        myElement.style.color = "red";
+        myElement.innerHTML = "Enter Valid Mobile Number Only";
+        registerButton.disabled = true;
+        registerButton.classList.remove("bg-blue-500", "hover:bg-blue-700", "text-white");
+        registerButton.classList.add("bg-gray-500", "text-white");
+
+        // You can also add other actions here, like clearing the input or focusing on it
+        // mobileInput.value = "";
+        // mobileInput.focus();
+      }
+      else{
+        const myElement = document.getElementById('error_message')
+        myElement.style.color = "white";
+        myElement.innerHTML = "";
+        registerButton.disabled = false;
+        registerButton.classList.remove("bg-gray-500", "text-white");
+        registerButton.classList.add("bg-blue-500", "hover:bg-blue-700", "text-white");
+      }
+    }
+  </script>
+</div>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "base.html" %} {% block content %}
+
+<body>
+  <div class="bg-gray-100 min-h-screen">
+    <div class="flex">
+      <div class="flex flex-col h-screen bg-gray-200 p-4">
+        {% include 'sidebar.html' %}
+      </div>
+      <div class="w-auto p-4">
+        <div class="container m-auto">
+          <h1 class="text-2xl font-bold mb-2">Master Stocks</h1>
+
+          <div class="flex justify-between m-2">
+            <a
+              href="{{ url_for('add') }}"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold p-2 rounded"
+              >Add Stock</a
+            >
+
+            <!-- <form   action="{{ url_for('search') }}" method="GET">
+              <label for="search" class="sr-only">Search</label>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Search stocks"
+                class="border border-gray-400 p-2 rounded-lg"
+              />
+              <button
+                type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg ml-2"
+              >
+                Search
+              </button>
+            </form> -->
+
+            <a
+              href="{{ url_for('upload_csv') }}"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              >Upload CSV</a
+            >
+          </div>
+
+          <p class="mb-4">Showing {{ stocks.total }} stocks.</p>
+          <p>
+            Upload File Format should be Csv with
+            <strong>Symbol,icici_symbol,company_name,is_intra_day</strong>
+            Columnnames
+          </p>
+
+          <div class="m-4">
+            <!-- Add the "Download CSV" button -->
+            <a
+              href="{{ url_for('download_csv') }}"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Download CSV
+            </a>
+          </div>
+
+          <div class="m-4">
+            {% if pagination.has_prev %}
+            <a
+              href="/list/{{ pagination.prev_num }}"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+              >Previous</a
+            >
+            {% endif %} {% if pagination.has_next %}
+            <a
+              href="/list/{{ pagination.next_num }}"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded ml-2"
+              >Next</a
+            >
+            {% endif %}
+          </div>
+
+          <table class="table-auto w-full text-sm">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="px-4 py-2 text-left">Id</th>
+
+                <th class="px-4 py-2 text-left">Symbol</th>
+                <th class="px-4 py-2 text-left">Company Name</th>
+
+                <th class="px-4 py-2 text-left">ICICI Symbol</th>
+                <th class="px-4 py-2 text-left">IS INTRADAY</th>
+
+                <th class="px-4 py-2"></th>
+                <th class="px-4 py-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for stock in pagination.items %}
+              <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="px-4 py-2">{{ stock.id }}</td>
+
+                <td class="px-4 py-2">{{ stock.symbol }}</td>
+                <td class="px-4 py-2">{{ stock.company_name }}</td>
+                <td class="px-4 py-2">{{ stock.icici_symbol }}</td>
+                <td class="px-4 py-2">{{ stock.is_intra_day }}</td>
+
+                <td class="p-auto">
+                  <a
+                    href="{{ url_for('edit', id=stock.id) }}"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 rounded text-xs"
+                    >Edit</a
+                  >
+                </td>
+                <td class="p-auto">
+                  <a
+                    href="{{ url_for('delete', id=stock.id) }}"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded text-xs"
+                    >Delete</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <div class="mt-4">
+            {% if pagination.has_prev %}
+            <a
+              href="/list/{{ pagination.prev_num }}"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+              >Previous</a
+            >
+            {% endif %} {% if pagination.has_next %}
+            <a
+              href="/list/{{ pagination.next_num }}"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded ml-2"
+              >Next</a
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

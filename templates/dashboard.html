@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+  <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:w-1/5 h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div class="flex-1 p-4">
+      <h1 class="text-2xl font-bold mb-4">{{ user.fullname }}!</h1>
+      <h1 class="text-2xl font-bold mb-4">Home Page</h1>
+
+      <div class="flex flex-col items-center justify-center h-screen">
+        <h1>Welcome to the dashboard, {{ user.email }}!</h1>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

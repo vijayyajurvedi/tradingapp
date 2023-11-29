@@ -1,0 +1,190 @@
+{% extends "base.html" %} {% block content %}
+
+<head>
+  <title>Edit User</title>
+</head>
+
+<body>
+  <div class="flex">
+    <div class="flex flex-col h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div class="m-auto">
+      <h1 class="text-3xl font-bold mb-4">Edit User</h1>
+      <form method="POST">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="email">
+            Email
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            name="email"
+            type="email"
+            value="{{ user.email }}"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="password">
+            Password
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            name="password"
+            type="password"
+            value="{{ user.password }}"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="mobile_no" class="block text-sm font-medium text-gray-700"
+            >Mobile Number:</label
+          >
+          <input
+            type="text"
+            name="mobile_no"
+            id="mobile_no"
+            required
+            value="{{ user.mobile_no }}"
+            class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="address" class="block text-sm font-medium text-gray-700"
+            >Address:</label
+          >
+          <textarea
+            name="address"
+            id="address"
+            rows="3"
+            required
+            class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full resize-none"
+          >
+{{user.address}}</textarea
+          >
+        </div>
+
+        <div class="mb-6">
+          <label for="zipcode" class="block text-sm font-medium text-gray-700"
+            >Zipcode:</label
+          >
+          <input
+            type="text"
+            name="zipcode"
+            id="zipcode"
+            required
+            pattern="[0-9]{6}"
+            class="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full"
+            title="Enter Valid Zip Code"
+            oninvalid="this.setCustomValidity('Enter Valid Zip Code Only')"
+            oninput="this.setCustomValidity('')"
+            value="{{user.zipcode}}"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="is_admin">
+            Is Admin?
+          </label>
+          <input
+            class="mr-2 leading-tight"
+            type="checkbox"
+            id="is_admin"
+            name="is_admin"
+            {%
+            if
+            user.is_admin
+            %}checked{%
+            endif
+            %}
+          />
+          <label class="block text-gray-500 font-bold" for="is_admin">
+            Check this box if the user is an admin.
+          </label>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="is_admin">
+            Is Active?
+          </label>
+          <input
+            class="mr-2 leading-tight"
+            type="checkbox"
+            id="is_active"
+            name="is_active"
+            {%
+            if
+            user.is_active
+            %}checked{%
+            endif
+            %}
+          />
+          <label class="block text-gray-500 font-bold" for="is_active">
+            Check this box if the user is Active.
+          </label>
+        </div>
+
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 font-bold mb-2"
+            for="is_icici_demat_account"
+          >
+            Is ICICI Demat Account?
+          </label>
+          <input
+            class="mr-2 leading-tight"
+            type="checkbox"
+            id="is_icici_demat_account"
+            name="is_icici_demat_account"
+            {%
+            if
+            user.is_icici_demat_account
+            %}checked{%
+            endif
+            %}
+          />
+          <label class="block text-gray-500 font-bold" for="is_active">
+            DO YOU HAVE DEMAT/TRADING ACCOUNT WITH ICICI BANK.? IF YES PLEASE
+            TICK THE FOLLOWING BOX
+          </label>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="is_admin">
+            Is Logged In?
+          </label>
+          <input
+            class="mr-2 leading-tight"
+            type="checkbox"
+            id="is_login"
+            name="is_login"
+            {%
+            if
+            user.is_login
+            %}checked{%
+            endif
+            %}
+          />
+          <label class="block text-gray-500 font-bold" for="is_active">
+            Check this box if the user is Logged In.
+          </label>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block content %}
+<head>
+  <title>Static Configuration Details</title>
+</head>
+<body>
+  <div class="flex">
+    <div class="flex flex-col h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+    <div class=" mx-auto">
+      <h1 class="text-2xl font-bold mb-4">{{ user.fullname }}</h1>
+      <h1 class="text-2xl font-bold mb-4">Static Configuration Details</h1>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border rounded">
+          <thead>
+            <tr>
+              <th class="border px-6 py-4">Field</th>
+              <th class="border px-6 py-4">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-6 py-4">Email</td>
+              <td class="border px-6 py-4">{{ user.email }}</td>
+            </tr>
+            <tr>
+              <td class="border px-6 py-4">Price Range</td>
+              <td class="border px-6 py-4">
+                
+              
+                {% if static_config.price_range %}
+                Minimum value = {{ static_config.price_range.min }}, Maximum value = {{ static_config.price_range.max }}
+              {% else %}
+                N/A
+              {% endif %}
+            </td>
+            </tr>
+            <tr>
+              <td class="border px-6 py-4">Investment Buget</td>
+              <td class="border px-6 py-4">
+                {{ static_config.opening_balance }}
+              </td>
+            </tr>
+
+            <tr>
+              <td class="border px-6 py-4">Expected Returns On Investment  %</td>
+              <td class="border px-6 py-4">
+                {{ static_config.returns_percentage }}
+              </td>
+            </tr>
+
+            <tr>
+              <td class="border px-6 py-4">Expected Brokerage And Other Charges  for Trading %</td>
+              <td class="border px-6 py-4">
+                {{ static_config.other_charges }}
+              </td>
+            </tr>
+            <!-- Add more rows for additional fields as needed -->
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-4">
+        <a
+          href="/update_static_config/{{ user.id }}"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Update Static Configuration
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

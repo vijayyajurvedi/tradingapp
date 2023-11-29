@@ -1,0 +1,344 @@
+{% extends "base.html" %} {% block content %}
+
+<body>
+  <div class="bg-gray-100 min-h-screen">
+    <div class="flex">
+      <div class="flex flex-col h-screen bg-gray-200 p-4">
+        {% include 'sidebar.html' %}
+      </div>
+      {% if is_trading_hours_flag %}
+
+      <div class="w-3/4 p-4">
+        <div class="container mx-auto py-8">
+          <h1 class="text-2xl font-bold mb-8">{{user.fullname}}</h1>
+          <h1 class="text-2xl font-bold mb-8">Trading Window</h1>
+
+          <p class="mb-4">Showing {{ total }} records</p>
+          <!-- <p class="mb-4">Started on date {{ StartLoadedDate }}</p>
+          <p class="mb-4">Ended on date {{ EndLoadedDate }}</p>
+          <p class="mb-4">Time Taken In Minutes {{ TimeTakeninMin }}</p> -->
+
+          <!-- <div class="pagination m-2 ">
+            {% if current_page > 1 %}
+                <a href="{{ url_for('tradingwindow', page=current_page - 1) }}">Previous</a>
+            {% endif %}
+            
+            {% for page_num in range(1, total_pages + 1) %}
+                {% if page_num == current_page %}
+                    <span class="current">{{ page_num }}</span>
+                {% else %}
+                    <a href="{{ url_for('tradingwindow', page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+        
+            {% if current_page < total_pages %}
+                <a href="{{ url_for('tradingwindow', page=current_page + 1) }}">Next</a>
+            {% endif %}
+        </div> -->
+          <div class="overflow-x-auto">
+            <table
+              class="table-auto w-full border border-black-collapse text-sm"
+              style="table-layout: auto"
+            >
+              <thead>
+                <tr>
+                  <!-- {% for header in headers %}
+                  <th class="border border-black px-1 text-sm">{{ header }}</th>
+                  {% endfor %} -->
+                  <th class="border border-black px-1">Id</th>
+                  <th class="border border-black px-1 w-auto text-sm">
+                    Date/Time/ Time Taken for Down loading
+                  </th>
+                  <th class="border border-black px-1">Ticker Symbol</th>
+                  <th class="border border-black px-1">Company Name</th>
+                  <th class="border border-black px-1">Volume</th>
+                  <th class="border border-black px-1">EMA (3)</th>
+                  <th class="border border-black px-1">Short SMA (10)</th>
+                  <th class="border border-black px-1">Long SMA (50)</th>
+                  <th class="border border-black px-1">VWAP</th>
+                  <th class="border border-black px-1">RSI (14)</th>
+                  <th class="border border-black px-1">High (1)</th>
+                  <th class="border border-black px-1">Low (1)</th>
+                  <th class="border border-black px-1">
+                    Morning Open @9:15 am
+                  </th>
+                  <th class="border border-black px-1">
+                    Morning Close @9:15 am
+                  </th>
+
+                  <th class="border border-black px-1">Current Open (1)</th>
+                  <th class="border border-black px-1">Current Price (1)</th>
+                  <th class="border border-black px-1">Signal</th>
+                  <th class="border border-black px-1">Expected Profit</th>
+
+                  <th class="border border-black px-1">SEV</th>
+                  <!--<th class="border border-black px-1">Start Earning</th> -->
+                  <th class="border border-black px-1">MEV</th>
+                  <!--<th class="border border-black px-1">Morning Earning</th>-->
+                  <th class="border border-black px-1">Current Earning</th>
+                 
+
+                  <th class="border border-black px-1">Quantity</th>
+                  <th class="border border-black px-1">Total</th>
+
+                  <th class="border border-black px-1 text-sm">Action</th>
+
+                  <th class="border border-black px-1">Remark</th>
+                  <th class="border border-black px-1 text-sm">Holdings</th>
+
+                  <th class="border border-black px-1">Average</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for stock_data in stocks %}
+                <tr>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.id }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1 w-auto"
+                  >
+                    {{ stock_data.datetime }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.ticker_symbol }}
+                  </td>
+                  <td class="border border-black px-1">
+                    {{ stock_data.company_name }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.volume }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.ema }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.short_sma }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.long_sma }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.vwap }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.rsi }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.high }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.low }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.first_open }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.first_close }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.open }}
+                  </td>
+                  <td
+                  style="white-space: nowrap"
+                  class="border border-black px-1"
+                >
+                  {{ stock_data.close }}
+                </td>
+
+                <td
+                class="border border-black px-1 w-auto"
+                style="white-space: nowrap"
+              >
+                {{stock_data.MySignal}}
+              </td>
+
+              <td
+              class="border border-black px-1 w-auto font-bold"
+              style="white-space: nowrap"
+            >
+            {{ stock_data.MyProfit }}
+              
+              <!-- {% if stock_data.average_value > 0 %} {{
+              '{:.2f}'.format(stock_data.MyProfit) }} {% endif %} -->
+            </td>
+
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.start_earning }}
+                  </td>
+
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.first_earning }}
+                  </td>
+                  <td
+                    style="white-space: nowrap"
+                    class="border border-black px-1"
+                  >
+                    {{ stock_data.current_earning }}
+                  </td>
+                
+
+                  <!-- <td
+                    class="border border-black px-1 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    {{stock_data.Quantity}}
+                  </td> -->
+
+                  <td
+                    class="border border-black px-1 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    <form
+                      method="GET"
+                      action="{{ url_for('update_quantity', stock_id=stock_data.id) }}"
+                    >
+                      <div
+                        class="row text-center m-1 text-white-500 bg-black-500"
+                      >
+                        <input
+                          type="number"
+                          name="quantity"
+                          class="quantity-input px-2 py-1 text-white-500 bg-black-500"
+                          value="{{ stock_data.Quantity }}"
+                          style="width: 50px"
+                        />
+                      </div>
+                      <div class="row m-1">
+                        <button
+                          type="submit"
+                          class="bg-green-500 hover:bg-green-700 text-white font-bold rounded px-2 py-1"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </form>
+                  </td>
+
+                  <td
+                    class="border border-black px-1 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    {{ stock_data.close * stock_data.Quantity}}
+                  </td>
+               
+                  {% if stock_data.MySignal == "WAIT" %}
+                  <td
+                    class="border border-black p-2 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    <span
+                      class="bg-gray-300 text-gray-500 font-bold py-2 px-4 rounded"
+                      >{{stock_data.MySignal}} Stocks
+                    </span>
+                  </td>
+                  {% else %}
+                  <td
+                    class="border border-black p-2 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    <a
+                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      href="{{ url_for('tradingwindowstock', stock_id=stock_data.id ,  quantity=stock_data.Quantity) }}"
+                      >{{stock_data.MySignal}} Stocks
+                    </a>
+                  </td>
+                  {% endif %} {% if stock_data.remark=="BUYED" or
+                  stock_data.remark=="SOLD" %}
+                  <td
+                    class="border border-black px-1 w-auto font-bold"
+                    style="white-space: nowrap; background-color: yellow"
+                  >
+                    {{ stock_data.remark }}
+                  </td>
+                  {% else %}
+
+                  <td
+                    class="border border-black px-1 w-auto bg-success"
+                    style="white-space: nowrap"
+                  >
+                    {{ stock_data.remark }}
+                  </td>
+                  {% endif %}
+
+                  <td
+                    class="border border-black px-1 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    {{stock_data.Holdings}}
+                  </td>
+
+                  <td
+                    class="border border-black px-1 w-auto"
+                    style="white-space: nowrap"
+                  >
+                    {{stock_data.average_value}}
+                  </td>
+                 
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="w-3/4 p-4 text-center">
+        <div class="flex justify-center items-center h-screen">
+          <h1 class="text-4xl">You are outside trading hours.</h1>
+        </div>
+      </div>
+
+      {% endif %}
+    </div>
+  </div>
+</body>
+
+{% endblock %}

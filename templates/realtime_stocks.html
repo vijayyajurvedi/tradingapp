@@ -1,0 +1,99 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mx-auto bg-gray-100 min-h-screen">
+  <div class="flex flex-wrap">
+    <div class="w-auto md:w-auto">{% include 'sidebar.html' %}</div>
+    <div class="w-full md:w-3/4 p-4">
+      <h1 class="text-2xl font-bold">RealTime Stocks</h1>
+      <p class="mb-4">
+        Showing {{ total }} records, Started on date {{ StartLoadedDate }},
+        Ended on date {{ EndLoadedDate }}, Time Taken In Minutes
+        {{TimeTakeninMin }}
+      </p>
+      <div class="table-responsive" id="table-container">
+        <table class="table table-light">
+          <thead class="bg-light" id="table-header">
+            <tr class="text-xs">
+              <th class="border p-1">Id</th>
+              <th class="border p-1 w-auto text-sm">
+                Date/Time/ Time Taken for Downloading
+              </th>
+              <th class="border p-1">Ticker Symbol</th>
+              <th class="border p-1">Company Name</th>
+              <th class="border p-1">Volume</th>
+              <th class="border p-1">EMA</th>
+              <th class="border p-1">Short SMA</th>
+              <th class="border p-1">Long SMA</th>
+              <th class="border p-1">VWAP</th>
+              <th class="border p-1">RSI</th>
+              <th class="border p-1">High</th>
+              <th class="border p-1">Low</th>
+              <th class="border p-1">Average Close</th>
+              <th class="border p-1">Average Open</th>
+              <th class="border p-1">Rise Count</th>
+              <th class="border p-1">Morning Open</th>
+              <th class="border p-1">Morning Close</th>
+              <th class="border p-1">Start Earning</th>
+              <th class="border p-1">Current Open</th>
+              <th class="border p-1">Current Close</th>
+              <th class="border p-1">Morning Earning</th>
+              <th class="border p-1">Earning Current</th>
+              <th class="border p-1">Close (-1 Candle)</th>
+              <th class="border p-1">Close (-2 Candle)</th>
+              <th class="border p-1">Close (-3 Candle)</th>
+              <th class="border p-1">Close (-4 Candle)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for stock_data in stocks %}
+            <tr>
+              <td class="border p-1">{{ stock_data.id }}</td>
+              <td class="border p-1 w-auto">{{ stock_data.datetime }}</td>
+              <td class="border p-1">{{ stock_data.ticker_symbol }}</td>
+              <td class="border p-1">{{ stock_data.company_name }}</td>
+              <td class="border p-1">{{ stock_data.volume }}</td>
+              <td class="border p-1">{{ stock_data.ema }}</td>
+              <td class="border p-1">{{ stock_data.short_sma }}</td>
+              <td class="border p-1">{{ stock_data.long_sma }}</td>
+              <td class="border p-1">{{ stock_data.vwap }}</td>
+              <td class="border p-1">{{ stock_data.rsi }}</td>
+              <td class="border p-1">{{ stock_data.high }}</td>
+              <td class="border p-1">{{ stock_data.low }}</td>
+              <td class="border p-1">{{ stock_data.close_average }}</td>
+              <td class="border p-1">{{ stock_data.average_open }}</td>
+              <td class="border p-1">{{ stock_data.Rise_count }}</td>
+              <td class="border p-1">{{ stock_data.first_open }}</td>
+              <td class="border p-1">{{ stock_data.first_close }}</td>
+              <td class="border p-1">{{ stock_data.start_earning }}</td>
+              <td class="border p-1">{{ stock_data.open }}</td>
+              <td class="border p-1">{{ stock_data.close }}</td>
+              <td class="border p-1">{{ stock_data.first_earning }}</td>
+              <td class="border p-1">{{ stock_data.current_earning }}</td>
+              <td class="border p-1">{{ stock_data.close_1c_ago }}</td>
+              <td class="border p-1">{{ stock_data.close_2c_ago }}</td>
+              <td class="border p-1">{{ stock_data.close_3c_ago }}</td>
+              <td class="border p-1">{{ stock_data.close_4c_ago }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  /* CSS for making the table header sticky */
+  #table-container {
+    max-height: 80vh;
+    /* Adjust the maximum height as needed */
+    overflow-y: scroll;
+    position: relative;
+  }
+
+  #table-header {
+    position: sticky;
+    top: 0;
+    background-color: grey;
+    color: black;
+  }
+</style>
+{% endblock %}

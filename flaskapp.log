@@ -1,0 +1,9 @@
+2023-11-29 12:43:25,917 - INFO - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-11-29 12:43:25,917 - INFO - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-11-29 12:43:25,917 - INFO - _real_add_job - Added job "StockSelectionProgram" to job store "default"
+2023-11-29 12:43:25,917 - INFO - _real_add_job - Added job "RealTimeProgram" to job store "default"
+2023-11-29 12:43:25,917 - INFO - start - Scheduler started
+2023-11-29 12:43:25,976 - INFO - _log - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-29 12:43:25,978 - INFO - _log - [33mPress CTRL+C to quit[0m
+2023-11-29 12:43:25,983 - INFO - _log -  * Restarting with stat

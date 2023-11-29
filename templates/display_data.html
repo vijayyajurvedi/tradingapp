@@ -1,0 +1,80 @@
+{% extends "base.html" %} {% block content %}
+ 
+<body>
+  <div class="bg-gray-100 min-h-screen">
+    <div class="flex">
+      <div class="flex flex-col h-screen bg-gray-200 p-4">
+        {% include 'sidebar.html' %}
+      </div>
+      <div class="w-3/4 p-4">
+     <div class="container mx-auto py-8">
+    <div class="overflow-x-auto">
+        <h1 class="text-2xl font-bold mb-8">RealTime Stocks</h1>
+        <p class="mb-4">Showing {{ total }} records,  Started on date {{ StartLoadedDate }},Ended on date {{ EndLoadedDate }}, Time Taken In Minutes {{ TimeTakeninMin }}</p>
+
+        <table  class="table-auto w-full border border-black-collapse text-sm">
+            <thead>
+                <tr>
+                    <th class="border border-black px-1">ID</th>
+                    <th class="border border-black px-1 w-auto text-sm">Datetime</th>
+                    <th class="border border-black px-1">Ticker Symbol</th>
+                    <th class="border border-black px-1">Volume</th>
+                    <th class="border border-black px-1">EMA</th>
+                    <th class="border border-black px-1">Short SMA</th>
+                    <th class="border border-black px-1">Long SMA</th>
+                    <th class="border border-black px-1">VWAP</th>
+                    <th class="border border-black px-1">RSI</th>
+                    <th class="border border-black px-1">High</th>
+                    <th class="border border-black px-1">Low</th>
+                    <th class="border border-black px-1">Start Earning</th>
+                    <th class="border border-black px-1">First Close</th>
+                    <th class="border border-black px-1">First Open</th>
+                    <th class="border border-black px-1">Open</th>
+                    <th class="border border-black px-1">Close</th>
+                    <!-- <th class="border border-black px-1">Buy Signal</th>
+                    <th class="border border-black px-1">Sell Signal</th> -->
+                    <th class="border border-black px-1">First Earning</th>
+                    <th class="border border-black px-1">Earning Current</th>
+                    <th class="border border-black px-1">Create Date Time</th>
+                    <th class="border border-black px-1">Holdings</th>
+                    <th class="border border-black px-1">MySignal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.id }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.datetime }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.ticker_symbol }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.volume }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.ema }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.short_sma }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.long_sma }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.vwap }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.rsi }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.high }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.low }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.start_earning }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.first_close }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.first_open }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.open }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.close }}</td>
+                    <!-- <td style="white-space: nowrap;" class="border border-black px-1">{{ item.buy_signal }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.sell_signal }}</td> -->
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.first_earning }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.earning_current }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.create_date_time }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.Holdings }}</td>
+                    <td style="white-space: nowrap;" class="border border-black px-1">{{ item.MySignal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

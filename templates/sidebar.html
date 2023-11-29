@@ -1,0 +1,169 @@
+{% extends "base.html" %} {% block content %}
+
+<body>
+  <div class="h-screen flex flex-col justify-between bg-gray-100 p-4">
+    <div class="flex-grow">
+      <ul class="list-none flex flex-col">
+        <!-- <li  >
+          <a
+            href="/dashboard"
+            class="block p-2 rounded-lg hover:bg-gray-200"
+            >Dashboard</a
+          >
+        </li> -->
+        <li>
+          <a href="/user_profile" class="block p-2 rounded-lg hover:bg-gray-200"
+            >Profile</a
+          >
+        </li>
+        <li>
+          <a href="/list" class="block p-2 rounded-lg hover:bg-gray-200"
+            >Manage <br />
+            MasterStocks
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/static_configurations/0"
+            class="block p-2 rounded-lg hover:bg-gray-200"
+            >Static <br />
+            Configuration</a
+          >
+        </li>
+
+        <!-- <li  >
+          <a href="#" class="block p-2 rounded-lg hover:bg-gray-200"
+            >Settings</a
+          >
+        </li> -->
+
+        <li>
+          <a
+            href="/tradingwindow"
+            class="block p-2 rounded-lg hover:bg-gray-200"
+            >Trading <br />
+            Window</a
+          >
+        </li>
+        {% if user.is_admin ==false %}
+        <!-- <li  >
+          <a
+            href="/account_statment"
+            class="block p-2 rounded-lg hover:bg-gray-200"
+            >Account Statement</a
+          >
+        </li>  
+        -->
+        {% endif %}
+        <li>
+          <a href="/logout" class="block p-2 rounded-lg hover:bg-gray-200"
+            >Logout</a
+          >
+        </li>
+
+        {% if user.is_admin %}
+        <div class="admin">
+          <li class="relative mb-2">
+            <button
+              class="w-auto p-2 rounded-lg hover:bg-gray-200 flex justify-between items-center"
+              onclick="toggleMenu()"
+            >
+              <span>Admin Panel</span>
+              <svg
+                class="h-5 w-5 fill-current ml-2"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10 20a10 10 0 110-20 10 10 0 010 20zM2 10a8 8 0 1116 0 8 8 0 01-16 0z"
+                />
+              </svg>
+            </button>
+            <ul
+              id="menu"
+              class="hidden absolute z-10 bg-gray-100 rounded-lg shadow-lg"
+            >
+              <!-- <li>
+            <a href="/update_static_config/1">UpdateStaticConfig</a>
+          </li> -->
+
+              <li>
+                <a
+                  href="/admin/users"
+                  class="block p-2 rounded-lg hover:bg-gray-200"
+                  >Manage Users</a
+                >
+              </li>
+              <li>
+                <a href="/stocks" class="block p-2 rounded-lg hover:bg-gray-200"
+                  >Selected Stocks</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/realtimestocks"
+                  class="block p-2 rounded-lg hover:bg-gray-200"
+                  >Realtime Stocks</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="/jobstatus"
+                  class="block p-2 rounded-lg hover:bg-gray-200"
+                  >Job Status</a
+                >
+              </li>
+              <!-- Include this link in your sidebar or navigation menu -->
+              <li>
+                <a
+                  class="block p-2 rounded-lg hover:bg-gray-200"
+                  href="{{ url_for('empty_stock_data') }}"
+                  >Empty StockData</a
+                >
+              </li>
+
+              <li>
+                <a
+                  class="block p-2 rounded-lg hover:bg-gray-200"
+                  href="{{ url_for('empty_stock_data_master_stocks') }}"
+                  >Empty Master StockData</a
+                >
+              </li>
+
+              <!-- <li  > -->
+              <!-- <a href="/stock_selection">Stock Selection</a> -->
+              <!-- </li> -->
+
+              <!-- <li  > -->
+              <!-- <a href="/checkprocess">Check Stock Selection Process Status</a> -->
+              <!-- </li> -->
+            </ul>
+          </li>
+        </div>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <style>
+    a {
+      font-size: small;
+    }
+  </style>
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("menu");
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+      } else {
+        menu.classList.add("hidden");
+      }
+    }
+  </script>
+</body>
+{% endblock %}

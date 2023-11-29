@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+  <title>User List</title>
+</head>
+
+<body>
+  <div class="flex">
+    <div class="flex flex-col h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div>
+      <h1 class="text-3xl font-bold mb-4">User List</h1>
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full text-sm">
+          <thead>
+            <tr>
+              <th class="p-2 border">ID</th>
+              <th class="p-2 border">Full Name</th>
+
+              <th class="p-2 border">Email</th>
+              <th class="p-2 border">Password</th>
+              <th class="p-2 border">Mobile</th>
+              <th class="p-2 border">Address</th>
+              <th class="p-2 border">ZipCode</th>
+
+              <th class="p-2 border">Is Admin?</th>
+              <th class="p-2 border">Is Active?</th>
+              <th class="p-2 border">Is ICICI Demat Account?</th>
+              <th class="p-2 border">Is logged In?</th>
+
+
+
+              <th class="p-2 border" colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td class="border p-2">{{ user.id }}</td>
+              <td class="border p-2">{{ user.fullname }}</td>
+              <td class="border p-2">{{ user.email }}</td>
+              <td class="border p-2">
+                <input
+                  type="password"
+                  name="password"
+                  value="{{ user.password }}"
+                  class="hidden"
+                />
+                <span class="password-text">{{ user.password }}</span>
+              </td>
+            </td>
+              <td class="border p-2">{{ user.mobile_no }}</td>
+              <td class="border p-2">{{ user.address }}</td>
+              <td class="border p-2">{{ user.zipcode }}</td>
+
+              <td class="border p-2"> 
+
+                {% if user.is_admin %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+              </td>
+              <td class="border p-2"> 
+
+                {% if user.is_active %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+
+              </td>
+              <td class="border p-2">
+                {% if user.is_icici_demat_account %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+              </td>
+
+              <td class="border p-2">{{user.is_login}}</td>
+
+              
+              <td class="border p-2">
+                <form action="/admin/users/{{ user.id }}/edit" method="GET">
+                  <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2"
+                    type="submit"
+                  >
+                    Edit
+                  </button>
+                </form>
+              </td>
+              <td class="border p-2">
+                <form action="/admin/users/{{ user.id }}/remove" method="POST">
+                  <button
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold rounded p-2"
+                    type="submit"
+                  >
+                    Remove
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

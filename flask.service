@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn instance to serve Flask
+After=network.target
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/gouriimp/public_html/rudra-t-s/project
+Environment="PATH=/home/gouriimp/public_html/rudra-t-s/project/venv/bin"
+ExecStart=/home/gouriimp/public_html/rudra-t-s/project/venv/bin/gunicorn --certfile=/home/gouriimp/public_html/rudra-t-s/project/certs/combined.domain.com.crt --keyfile=/home/gouriimp/public_html/rudra-t-s/project/certs/domain.com.key --bind 0.0.0.0:8082 wsgi:app
+[Install]
+WantedBy=multi-user.target 

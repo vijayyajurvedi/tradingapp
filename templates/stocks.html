@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mx-auto bg-gray-100 min-h-screen">
+  <div class="flex flex-wrap">
+    <div class="w-auto md:w-auto">{% include 'sidebar.html' %}</div>
+    <div class="w-full md:w-3/4 p-4">
+      <h1 class="text-2xl font-bold">Stocks</h1>
+      <p>Showing {{ total }} stocks, loaded on date {{ LoadedDate }}</p>
+
+      <div class="table-responsive" id="table-container">
+        <table class="table table-light">
+          <thead class="bg-light" id="table-header">
+            <tr class="text-base">
+              <th class="border p-1">Date</th>
+              <th class="border p-1">Ticker Symbol</th>
+              <th class="border p-1">Company Name</th>
+              <th class="border p-1">Volume</th>
+              <th class="border p-1">High</th>
+              <th class="border p-1">Low</th>
+              <th class="border p-1">Last Day Close</th>
+              <th class="border p-1">Open</th>
+              <th class="border p-1">Close</th>
+              <th class="border p-1">Close 1d ago</th>
+              <th class="border p-1">Close 2d ago</th>
+              <th class="border p-1">Close 3d ago</th>
+              <th class="border p-1">Close 4d ago</th>
+              <th class="border p-1">Close 5d ago</th>
+              <th class="border p-1">Open 1d ago</th>
+              <th class="border p-1">Open 2d ago</th>
+              <th class="border p-1">Open 3d ago</th>
+              <th class="border p-1">Open 4d ago</th>
+              <th class="border p-1">Open 5d ago</th>
+              <th class="border p-1">Rise 1d ago</th>
+              <th class="border p-1">Rise 2d ago</th>
+              <th class="border p-1">Rise 3d ago</th>
+              <th class="border p-1">Rise 4d ago</th>
+              <th class="border p-1">Rise 5d ago</th>
+              <th class="border p-1">Rise count</th>
+              <th class="border p-1">Earnings</th>
+              <th class="border p-1">Create Date Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for stock in stocks %}
+            <tr class="text-xs">
+              <td class="border p-1">{{ stock.Date }}</td>
+              <td class="border p-1">{{ stock.Ticker_Symbol }}</td>
+              <td class="border p-1">{{ stock.company_name }}</td>
+              <td class="border p-1">{{ stock.Volume }}</td>
+              <td class="border p-1">{{ stock.High }}</td>
+              <td class="border p-1">{{ stock.Low }}</td>
+              <td class="border p-1">{{ stock.Last_Day_Close }}</td>
+              <td class="border p-1">{{ stock.Open }}</td>
+              <td class="border p-1">{{ stock.Close }}</td>
+              <td class="border p-1">{{ stock.Close_1d_ago }}</td>
+              <td class="border p-1">{{ stock.Close_2d_ago }}</td>
+              <td class="border p-1">{{ stock.Close_3d_ago }}</td>
+              <td class="border p-1">{{ stock.Close_4d_ago }}</td>
+              <td class="border p-1">{{ stock.Close_5d_ago }}</td>
+              <td class="border p-1">{{ stock.Open_1d_ago }}</td>
+              <td class="border p-1">{{ stock.Open_2d_ago }}</td>
+              <td class="border p-1">{{ stock.Open_3d_ago }}</td>
+              <td class="border p-1">{{ stock.Open_4d_ago }}</td>
+              <td class="border p-1">{{ stock.Open_5d_ago }}</td>
+              <td class="border p-1">{{ stock.Rise_1d_ago }}</td>
+              <td class="border p-1">{{ stock.Rise_2d_ago }}</td>
+              <td class="border p-1">{{ stock.Rise_3d_ago }}</td>
+              <td class="border p-1">{{ stock.Rise_4d_ago }}</td>
+              <td class="border p-1">{{ stock.Rise_5d_ago }}</td>
+              <td class="border p-1">{{ stock.Rise_count }}</td>
+              <td class="border p-1">{{ stock.Earnings }}</td>
+              <td class="border p-1">{{ stock.create_date_time }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* CSS for making the table header sticky */
+  #table-container {
+    max-height: 80vh; /* Adjust the maximum height as needed */
+    overflow-y: scroll;
+    position: relative;
+  }
+
+  #table-header {
+    position: sticky;
+    top: 0;
+    background-color: grey;
+    color: black;
+  }
+</style>
+
+{% endblock %}

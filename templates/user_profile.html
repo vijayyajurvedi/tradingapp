@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+  <title>User Profile</title>
+</head>
+
+<body>
+  <div class="flex">
+    <div class="flex flex-col h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div class="mx-auto">
+      <h2 class="text-2xl font-bold mb-4">{{ user.fullname }}!</h2>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border border-collapse">
+          <tbody>
+            <tr>
+              <th class="p-2 border">Attribute</th>
+              <th class="p-2 border">Value</th>
+            </tr>
+            <tr>
+              <td class="border p-2">ID</td>
+              <td class="border p-2">{{ user.id }}</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Email</td>
+              <td class="border p-2">{{ user.email }}</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Full Name</td>
+              <td class="border p-2">{{ user.fullname }}</td>
+            </tr>
+            <!--
+            <tr>
+              <td class="border p-2">Password</td>
+              <td class="border p-2">
+                <input
+                  type="password"
+                  name="password"
+                  value="{{ user.password }}"
+                  class="hidden"
+                />
+                <span class="password-text">{{ user.password }}</span>
+              </td>
+            </tr>
+            -->
+            <tr>
+              <td class="border p-2">Mobile Number</td>
+              <td class="border p-2">{{ user.mobile_no }}</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Address</td>
+              <td class="border p-2">{{ user.address }}</td>
+
+            </tr>
+            <tr>
+              <td class="border p-2">ZipCode</td>
+              <td class="border p-2">{{user.zipcode}}</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Is Having ICICI Demat Account</td>
+              <td class="border p-2">
+                {% if user.is_icici_demat_account %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

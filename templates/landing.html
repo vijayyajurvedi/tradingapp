@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+
+<body class="h-100" style="background-color: #000000">
+  <!-- <div class="h-auto"> -->
+    <!-- <img src="../static/SmallLogo.jpeg" alt="Logo" class="w-20 m-auto" /> -->
+    <!-- <h1 class="text-4xl font-bold text-center">Welcome to Our Software!</h1> -->
+    <!-- Buttons -->
+  <!-- </div> -->
+  <div class="flex flex-col items-center justify-center">
+    <div class="space-y-1">
+      <a href="/login"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">Login</a>
+      <a href="/register"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">Register</a>
+    </div>
+    <div class="w-screen m-2">
+      <img src="../static/logo.gif" alt="Logo" class="object-contain w-full h-[80vh]" />
+    </div>
+  </div>
+</body>
+{% endblock %}

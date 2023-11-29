@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}
+
+<body>
+  <div class="flex">
+    <div class="flex flex-col h-screen bg-gray-200 p-4">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div class="bg-gray-100 m-auto p-4 rounded-lg w-full max-w-md">
+      <div class="w-3/4 p-4">
+        <h1 class="text-2xl font-bold mb-4">Add a new stock</h1>
+        <form action="{{ url_for('add') }}" method="POST">
+          <div class="mb-4">
+            <label for="symbol" class="block text-gray-700 font-bold mb-2"
+              >Symbol</label
+            >
+            <input
+              type="text"
+              name="symbol"
+              id="symbol"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="company_name" class="block text-gray-700 font-bold mb-2"
+              >Company Name</label
+            >
+            <input
+              type="text"
+              name="company_name"
+              id="company_name"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="icici_symbol" class="block text-gray-700 font-bold mb-2"
+              >ICICI Symbol</label
+            >
+            <input
+              type="text"
+              name="icici_symbol"
+              id="icici_symbol"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Add Stock
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}
